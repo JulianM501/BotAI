@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clasificador de Imagen</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<h1>Clasificador de imágenes</h1>
+
+<form action="/check" method="post" enctype="multipart/form-data">
+    <input type="file" name="image" required>
+    <button type="submit">Analizar</button>
+</form>
+
+{% if result %}
+<div class="result">
+    <h2>Resultado:</h2>
+    <p>Clase: {{ result }}</p>
+    <p>Confianza: {{ confidence }}%</p>
+
+    {% if confidence < 60 %}
+        <p class="warning">⚠️ No estoy muy seguro de esta predicción.</p>
+    {% endif %}
+</div>
+{% endif %}
+
+</body>
+</html>
